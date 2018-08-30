@@ -1,10 +1,18 @@
 # Oracle Alembic
+Alembic は SQLAlchemy を使用してリレーショナルデータベースの作成、変更、削除を管理するマイグレーション・ツールです。
 
 Alembic provides for the creation, management, and invocation of change management scripts for a relational database, using SQLAlchemy as the underlying engine. This tutorial will provide a full introduction to the theory and usage of this tool.
 
-Alembic は SQLAlchemy を使用してリレーショナルデータベースの作成、変更、削除を管理するマイグレーション・ツールです。
+ORACLE データベースをプロジェクトで使用することになりマイグレーションツールを探しましたが Ruby on Rails や CakePHP に採用されている様な使いやすいツールが見当たらず、辿り着いたのが Python の代表的な ORM である SQL Alchemy をベースに使用した Alembic というマイグレーションフレームワークです。
 
-本リポジトリでは docker-compose を使用して oracle-container と alembic-container を立ち上げてマイグレーションの実行を行うサンプルを動作させることが出来ます。
+
+本リポジトリでは docker-compose を使用して oracle-container と alembic-container を立ち上げてマイグレーションの実行を行うサンプルを動作させることが出来、最短の学習でプロジェクトに組み入れることが可能となっています。
+
+## 必要な物
+
+- docker for Mac / Windows
+- docker 利用に関する簡単な知識
+- ORACLE 利用に関する簡単な知識
 
 ## Oracle container information
 
