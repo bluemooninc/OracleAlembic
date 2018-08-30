@@ -1,0 +1,33 @@
+###
+### https://qiita.com/shintaro123/items/a8a3d222d3dd46aba876
+###
+version: '2'
+
+services:
+  oracle:
+    image: sath89/oracle-12c
+    container_name: "oracle-container"
+    ports:
+      - "8080:8080"
+      - "1521:1521"
+    environment:
+      ORACLE_SID: xe
+      ORACLE_PDB: xe
+    volumes:
+     - "./oracle:/u01/app/oracle"
+
+  alembic:
+    restart: always
+    build: ./alembic
+    container_name: "alembic-container"
+    command: 'tail -f /dev/null'
+    environment:
+    - SQLALCHEMY_DATABASE_URI = oracle+cx_oracle://system:oracle@oracle-container:1521/?service_name=xe
+    links:
+    - "oracle:db"
+    volumes:
+    - ./alembic/yourproject:/root/yourproject
+    working_dir: '/root/'
+
+volumes:
+  data: {}
