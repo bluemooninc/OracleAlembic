@@ -22,7 +22,7 @@ ORACLE データベースをプロジェクトで使用することになりマ�
 
 ```
 # ホストPCにある共有フォルダ
-/Users/ユーザー名/プロジェクト作成フォルダ/yourproject/alembic/versions
+/Users/ユーザー名/コンテナフォルダ/yourproject/alembic/versions
 ```
 
 マイグレーションコマンドの実行は Alembic コンテナに入ってコマンドラインから実行します。
