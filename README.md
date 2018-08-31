@@ -14,6 +14,90 @@ ORACLE データベースをプロジェクトで使用することになりマ�
 - docker 利用に関する簡単な知識
 - ORACLE 利用に関する簡単な知識
 
+## 簡単説明
+
+## マイグレーションの使い方
+
+編集は、ローカルPCの共有フォルダから編集します。
+
+```
+# ホストPCにある共有フォルダ
+/Users/ユーザー名/プロジェクト作成フォルダ/migrations/alembic/versions
+```
+
+マイグレーションコマンドの実行は Alembic コンテナに入ってコマンドラインから実行します。
+
+```
+# Alembicコンテナに入る
+docker exec -it alembic-container bash
+# プロジェクトフォルダに移動する
+cd /root/migrations
+```
+
+### 新しいマイグレーションを作成する
+
+```
+alembic revision -m "create account table"
+```
+-m はメッセージタイトルです
+
+### 新しいマイグレーションを編集する
+
+マイグレーションを作成で作られたファイルをエディタで開き、upgradeの pass を削除してそこにSQL分もしくはORMスキームを記述します。
+upgradeには実行したいSQLを記述し、downgradeには実行したSQLを打ち消すSQLを記述します。
+
+```
+def upgrade():
+    pass
+
+
+def downgrade():
+    pass
+```
+
+|No| ORM スキーム | 説明 |
+|:---|:---|:---|
+|1|add_column(table_name, column, schema=None) |カラム追加 |
+|2|bulk_insert(table, rows, multiinsert=True) |複数レコード追加 |
+|3|create_index(index_name, table_name, columns, schema=None, unique=False, **kw) |インデックス作成 |
+|4|create_primary_key(constraint_name, table_name, columns, schema=None) |主キー作成 |
+|5|create_table(table_name, *columns, **kw) |テーブル作成 |
+|6|execute(command) |SQL実行 |
+|7|drop_column(column_name, **kw) |カラム削除 |
+|8|drop_table(table_name, schema=None, **kw) |テーブル削除 |
+|9|drop_index(index_name, **kw) |インデックス削除|
+
+### 編集例
+
+```
+def upgrade():
+    op.create_table(
+        'account',
+        sa.Column('id', sa.Integer, primary_key=True),
+        sa.Column('name', sa.String(50), nullable=False),
+        sa.Column('description', sa.Unicode(200)),
+    )
+
+
+def downgrade():
+    op.drop_table('account')
+```
+
+
+### マイグレーションを実行する
+```
+alembic upgrade head
+```
+### マイグレーションを巻き戻す
+
+巻き戻す(-1)と以前の状態に戻ります。そしてさらに戻す(+1)と現在に戻ります。
+```
+## 一つ前に戻す
+alembic downgrade -1
+## 一つ後ろに戻す
+alembic upgrade +1
+```
+
 ## Oracle container information
 
 Oracle のコンテナは、 Docker-hub にある以下URLのイメージをPULLして利用します。
