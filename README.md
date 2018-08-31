@@ -189,11 +189,11 @@ Every time Alembic runs an operation against the versions/ directory, it reads a
 We can then add some directives to our script, suppose adding a new table account:
 upgrade 
 
-メソッドには、実行したいディレクテブを記述します。ディレクテブ一覧は下記リンクにあります。
+メソッドには、実行したいスキームを記述します。 スキーム一覧は下記リンクにあります。
 
 http://alembic.zzzcomputing.com/en/latest/ops.html?highlight=create_table#alembic.operations.Operations.create_table
 
-|No| ディレクテブ | 説明 |
+|No|  ORM スキーム | 説明 |
 |:---|:---|:---|
 |1|add_column(table_name, column, schema=None) |カラム追加 |
 |2|bulk_insert(table, rows, multiinsert=True) |複数レコード追加 |
