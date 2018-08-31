@@ -22,7 +22,7 @@ ORACLE データベースをプロジェクトで使用することになりマ�
 
 ```
 # ホストPCにある共有フォルダ
-/Users/ユーザー名/プロジェクト作成フォルダ/migrations/alembic/versions
+/Users/ユーザー名/プロジェクト作成フォルダ/yourproject/alembic/versions
 ```
 
 マイグレーションコマンドの実行は Alembic コンテナに入ってコマンドラインから実行します。
@@ -31,7 +31,7 @@ ORACLE データベースをプロジェクトで使用することになりマ�
 # Alembicコンテナに入る
 docker exec -it alembic-container bash
 # プロジェクトフォルダに移動する
-cd /root/migrations
+cd /root/yourproject
 ```
 
 ### 新しいマイグレーションを作成する
